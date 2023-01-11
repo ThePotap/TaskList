@@ -1,0 +1,24 @@
+﻿@model List<TaskList.Models.Task>
+@{
+    ViewData["Title"] = "TaskList";
+}
+
+<div class="taskList">
+    <h1 align = "center">Task list</h1>
+    <table width="100%" border="1">
+        <tr>
+            <th class="text-center">Description</th>
+            <th class="text-center">Date</th>
+            <th class="text-center">Done</th>
+        </tr>
+        @foreach(var task in Model)
+        {
+            <tr>
+                <td class="text-center">@task.Description</td>
+                <td class="text-center">@task.Date</td>
+                <td class="text-center"><input type="checkbox"></td>
+            </tr>
+        }
+    </table>
+</div>
+
