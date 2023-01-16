@@ -12,7 +12,6 @@ namespace TaskList.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            Tasks = new List<Models.Task>();
         }
 
         public IActionResult Index()
@@ -27,6 +26,7 @@ namespace TaskList.Controllers
 
         public IActionResult TaskList()
         {
+            Tasks = new List<Models.Task>();
             Tasks.Add(new Models.Task { Id = 1, Description = "Уборка", ExpectedDate = DateTime.Now.AddDays(1) });
             Tasks.Add(new Models.Task { Id = 2, Description = "Посуда", ExpectedDate = DateTime.Now.AddDays(1) });
 
@@ -40,8 +40,9 @@ namespace TaskList.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteTask(int id)
+        public IActionResult DeleteTask(string deleteId)
         {
+            var id = Int32.Parse(deleteId);
             var found = Tasks.Find(item => item.Id == id);
             if(found != null)
             {
