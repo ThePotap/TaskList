@@ -7,6 +7,7 @@ namespace TaskList.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        public static List<Models.Task> Tasks { get; set; }
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -25,19 +26,29 @@ namespace TaskList.Controllers
 
         public IActionResult TaskList()
         {
-            var tasks = new List<Models.Task>()
-            {
-                new Models.Task{Description = "Уборка", Date = DateTime.Now.AddDays(1)},
-                new Models.Task{Description = "Посуда", Date = DateTime.Now.AddDays(1)}
-            };
+            Tasks = new List<Models.Task>();
+            Tasks.Add(new Models.Task { Id = 1, Description = "Уборка", ExpectedDate = DateTime.Now.AddDays(1) });
+            Tasks.Add(new Models.Task { Id = 2, Description = "Посуда", ExpectedDate = DateTime.Now.AddDays(1) });
 
-            return View(tasks);
+            return View(Tasks);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost]
+        public IActionResult DeleteTask(string delete)
+        {
+            var id = Int32.Parse(delete);
+            var found = Tasks.Find(item => item.Id == id);
+            if(found != null)
+            {
+                Tasks.Remove(found);
+            }
+            return View("TaskList", Tasks);
         }
     }
 }
