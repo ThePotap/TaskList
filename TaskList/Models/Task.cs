@@ -15,12 +15,11 @@
             IsCompleted = false;
         }
 
-        public Task(int id, string description, DateTime date)
+        public Task(int id, string description, DateTime date) : this()
         {
             Id = id;
             Description = description;
             ExpectedDate = date;
-            IsCompleted = false;
         }
     }
 }

@@ -16,3 +16,10 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.button-add {
+    color: red;
+    font-size: 32px;
+    display: block;
+    margin: 1em auto 1em;
+}
