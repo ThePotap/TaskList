@@ -1,0 +1,16 @@
+﻿@model TaskList.Models.Task
+
+<div>
+    @using (Html.BeginForm("CardAddEdit", "Home", FormMethod.Post))
+    {
+        @Html.LabelFor(m => Model.Description)<br>
+        @Html.EditorFor(m => Model.Description)<br>
+        @Html.LabelFor(m => Model.ExpectedDate)<br>
+        <input id="ExpectedDate" name="ExpectedDate" type="date" value="@Model.ExpectedDate" /><br>
+        <input type ="submit" value="AddEdit"/>
+    }
+    @using (Html.BeginForm("CardCancel", "Home"))
+    {
+        <input type="submit" value="Cancel" />
+    }
+</div>

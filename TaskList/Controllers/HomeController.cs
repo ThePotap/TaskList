@@ -27,8 +27,8 @@ namespace TaskList.Controllers
         public IActionResult TaskList()
         {
             Tasks = new List<Models.Task>();
-            Tasks.Add(new Models.Task { Id = 1, Description = "Уборка", ExpectedDate = DateTime.Now.AddDays(1) });
-            Tasks.Add(new Models.Task { Id = 2, Description = "Посуда", ExpectedDate = DateTime.Now.AddDays(1) });
+            Tasks.Add(new Models.Task { Id = Tasks.Count + 1, Description = "Уборка", ExpectedDate = DateTime.Now.AddDays(1) });
+            Tasks.Add(new Models.Task { Id = Tasks.Count + 1, Description = "Посуда", ExpectedDate = DateTime.Now.AddDays(1) });
 
             return View(Tasks);
         }
@@ -44,10 +44,31 @@ namespace TaskList.Controllers
         {
             var id = Int32.Parse(delete);
             var found = Tasks.Find(item => item.Id == id);
-            if(found != null)
+            if (found != null)
             {
                 Tasks.Remove(found);
             }
+            return View("TaskList", Tasks);
+        }
+
+        [HttpPost]
+        public IActionResult AddTask()
+        {
+            var task = new TaskList.Models.Task();
+            return View("TaskCard", task);
+        }
+
+        [HttpPost]
+        public IActionResult CardAddEdit(Models.Task task)
+        {
+            task.Id = Tasks.Count + 1;
+            Tasks.Add(task);
+            return View("TaskList", Tasks);
+        }
+
+        [HttpPost]
+        public IActionResult CardCancel(TaskList.Models.Task task)
+        {
             return View("TaskList", Tasks);
         }
     }

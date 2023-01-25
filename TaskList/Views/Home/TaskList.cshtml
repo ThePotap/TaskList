@@ -3,7 +3,7 @@
     ViewData["Title"] = "TaskList";
 }
 
-<div class="taskList">
+<div>
     <h1 align = "center">Task list</h1>
     <table width="100%" border="1">
         <tr>
@@ -28,5 +28,8 @@
     </table>
 </div>
 <div>
-    <button class="button-add">Add task</button>
+    @using(Html.BeginForm("AddTask", "Home"))
+    {        
+        <button class="button-add" type="submit">Add task</button>
+    }
 </div>
