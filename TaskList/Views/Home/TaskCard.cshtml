@@ -1,7 +1,7 @@
 ﻿@model TaskList.Models.Task
 
 <div>
-    @using (Html.BeginForm("CardAddEdit", "Home", FormMethod.Post))
+    @using (Html.BeginForm("CardAddEdit", "Home"))
     {
         @Html.LabelFor(m => Model.Description)<br>
         @Html.EditorFor(m => Model.Description)<br>
@@ -11,6 +11,6 @@
     }
     @using (Html.BeginForm("CardCancel", "Home"))
     {
-        <input type="submit" value="Cancel" />
+        <input type="submit" value="Cancel"/>
     }
 </div>

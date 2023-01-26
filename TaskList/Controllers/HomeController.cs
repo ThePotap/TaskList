@@ -54,20 +54,33 @@ namespace TaskList.Controllers
         [HttpPost]
         public IActionResult AddTask()
         {
-            var task = new TaskList.Models.Task();
+            var task = new Models.Task();
             return View("TaskCard", task);
         }
 
         [HttpPost]
         public IActionResult CardAddEdit(Models.Task task)
         {
-            task.Id = Tasks.Count + 1;
-            Tasks.Add(task);
+            if(task.Id == 0)
+            {
+                task.Id = Tasks.Count + 1;
+                Tasks.Add(task);
+            }
+            else
+            {
+                var found = Tasks.Find(item => item.Id == task.Id);
+                if (found != null)
+                {
+                    Tasks.Remove(found);
+                    Tasks.Add(task);
+                }
+            }
+            
             return View("TaskList", Tasks);
         }
 
         [HttpPost]
-        public IActionResult CardCancel(TaskList.Models.Task task)
+        public IActionResult CardCancel()
         {
             return View("TaskList", Tasks);
         }
