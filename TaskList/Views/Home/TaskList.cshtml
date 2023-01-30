@@ -12,20 +12,17 @@
             <th>Date</th>
             <th>Done</th>
         </tr>
-        @using (Html.BeginForm("DeleteTask", "Home"))
+        @foreach (var task in Model)
         {
-            @foreach (var task in Model)
-            {
-                <tr>
-                    <td>@task.Description</td>
-                    <td>@task.ExpectedDate</td>
-                    <td><input type="checkbox"></td>
-                    <td>
-                        <button type="submit" name="delete" value="@task.Id">delete</button>
-                        <input type="submit" formaction="EditTask" name="action" value="Edit" />
-                    </td>
-                </tr>
-            }
+            <tr>
+                <td>@task.Description</td>
+                <td>@task.ExpectedDate</td>
+                <td><input type="checkbox"></td>
+                <td>
+                    <button class="delete-task" data-id="@task.Id">delete</button>
+                    <button class="edit-task" data-id="@task.Id">edit</button>
+                </td>
+            </tr>
         }
     </table>
 </div>

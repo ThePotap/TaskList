@@ -40,15 +40,15 @@ namespace TaskList.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteTask(string delete)
+        public string DeleteTask(string deleteId)
         {
-            var id = Int32.Parse(delete);
+            var id = Int32.Parse(deleteId);
             var found = Tasks.Find(item => item.Id == id);
             if (found != null)
             {
                 Tasks.Remove(found);
             }
-            return View("TaskList", Tasks);
+            return "OK";
         }
 
         [HttpPost]
