@@ -18,6 +18,13 @@
         })
     })
 
+    $(".add-edit").click(function () {
+        let id = event.target.getAttribute("data-id");
+        let description = event.target.getAttribute("data-description");
+        let date = event.target.getAttribute("data-expected-date");
+        $("#addEditModal").modal("show");
+    })
+
     $(".edit-task").click(function () {
         
     })

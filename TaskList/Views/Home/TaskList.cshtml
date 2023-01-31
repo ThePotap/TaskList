@@ -20,15 +20,39 @@
                 <td><input type="checkbox"></td>
                 <td>
                     <button class="delete-task" data-id="@task.Id">delete</button>
-                    <button class="edit-task" data-id="@task.Id">edit</button>
+                    <button class="add-edit" data-id="@task.Id" data-description="@task.Description" data-expected-date="@task.ExpectedDate">edit</button>
                 </td>
             </tr>
         }
     </table>
 </div>
+
 <div>
     @using(Html.BeginForm("AddTask", "Home"))
     {        
         <button class="button-add" type="submit">Add task</button>
     }
+</div>
+
+<button class="add-edit" type="button" data-id="0">Add task</button>
+
+<div class="modal fade" id="addEditModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="description" class="col-form-label">Description:</label>
+                    <textarea class="form-control" id="description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="expected-date" class="col-form-label">Expected date:</label>
+                    <input type="date" class="form-control" id="expected-date" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button">Save</button>
+                <button type="button">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
