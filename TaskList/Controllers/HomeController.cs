@@ -40,9 +40,9 @@ namespace TaskList.Controllers
         }
 
         [HttpPost]
-        public string DeleteTask(string deleteId)
+        public string DeleteTask(string StrId)
         {
-            var id = Int32.Parse(deleteId);
+            var id = Int32.Parse(StrId);
             var found = Tasks.Find(item => item.Id == id);
             if (found != null)
             {
@@ -83,6 +83,19 @@ namespace TaskList.Controllers
         public IActionResult CardCancel()
         {
             return View("TaskList", Tasks);
+        }
+
+        [HttpPost]
+        public JsonResult GetTaskById(string StrId)
+        {
+            var id = Int32.Parse(StrId);
+            var found = Tasks.Find(item => item.Id == id);
+            if (found == null)
+            {
+                return Json(new Models.Task { Id = Tasks.Count + 1, Description = "", ExpectedDate = DateTime.Now });
+            }
+
+            return Json(found);
         }
     }
 }

@@ -8,24 +8,30 @@
         $.ajax({
             type: "POST",
             url: "/Home/DeleteTask",
-            data: { deleteId: id },
+            data: { StrId: id },
             dataType: "text",
-            success: function (response) {
-                if (response === 'OK') {
-                    row.remove();
-                }                    
-            }
+            success:
+                function (response) {
+                    if (response === 'OK') {
+                        row.remove();
+                    }                    
+                }
         })
     })
 
     $(".add-edit").click(function () {
         let id = event.target.getAttribute("data-id");
-        let description = event.target.getAttribute("data-description");
-        let date = event.target.getAttribute("data-expected-date");
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetTaskById",
+            data: { StrId: id },
+            dataType: "JSON",
+            success:
+                function (response) {
+                    $("#description").html(response.description);
+                    $("#expected-date").html(response.expectedDate);
+                }
+        })
         $("#addEditModal").modal("show");
-    })
-
-    $(".edit-task").click(function () {
-        
     })
 })
