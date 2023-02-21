@@ -52,13 +52,6 @@ namespace TaskList.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTask()
-        {
-            var task = new Models.Task();
-            return View("TaskCard", task);
-        }
-
-        [HttpPost]
         public IActionResult CardAddEdit(Models.Task task)
         {
             if(task.Id == 0)
